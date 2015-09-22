@@ -1,0 +1,8 @@
+#komparator .lCorpus-line-top, .lCorpus-line-bottom {
+  stroke: red;
+}
+
+#komparator .rCorpus-line-top, .rCorpus-line-bottom {
+  stroke: blue;
+}
+

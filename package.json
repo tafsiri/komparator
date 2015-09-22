@@ -2,21 +2,24 @@
   "name": "komparator",
   "version": "0.0.1",
   "description": "",
-  "main": "src/komparator.js",  
+  "main": "src/komparator.js",
   "author": "Yannick Assogba",
   "license": "MIT",
   "dependencies": {
+    "d3": "^3.5.6",
+    "lodash": "^3.10.1",
     "react": "^0.13.3"
   },
   "devDependencies": {
     "babelify": "^6.3.0",
-    "browserify": "^6.2.0",    
+    "browserify": "^6.2.0",
     "uglify-js": "~2.4.15",
     "watchify": "^2.1.1"
   },
   "scripts": {
-    "start": "watchify src/komparator.jsx --outfile build/komparator.js",
-    "build": "browserify src/komparator.jsx | uglifyjs -cm > build/komparator.min.js"
+    "start": "watchify -e src/index.jsx -t babelify -o build/komparator-app.js",
+    "build": "browserify -e src/index.jsx",
+    "build-min": "browserify src/index.jsx | uglifyjs -cm > build/komparator-app.min.js"
   },
   "browserify": {
     "transform": [
