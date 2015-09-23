@@ -6,3 +6,27 @@
   stroke: blue;
 }
 
+
+#komparator .token {
+  /*cursor: pointer;*/
+}
+
+
+#komparator .node-text {
+  font-family: sans-serif;
+  font-weight: 400;
+  fill: black;
+  font-variant:small-caps;
+}
+
+#komparator .token.active .node-text {
+  fill: black;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/*
+#komparator .token.active .node-bg {
+  fill:$highlight-col
+  opacity:0.85;
+}*/
