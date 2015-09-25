@@ -1,6 +1,7 @@
 import React from 'react';
 import TextUploader from './text-uploader.jsx';
 import CompareView from './compare-view.jsx'
+import samples from '../data/samples.js';
 
 
 class UIMenuComponent extends React.Component {
@@ -17,10 +18,10 @@ class Komparator extends React.Component {
     // this will eventually be a proper data store
     this.state = {
       left: {
-        text: "hello left"
+        text: samples.nyt
       },
       right: {
-        text: "hello right"
+        text: samples.fox
       }
     }
   }
@@ -29,6 +30,7 @@ class Komparator extends React.Component {
     this.setState(function(){
       var ret = {};
       ret[corpusId] = {text: newValue}  ;
+      console.log('text updated', ret)
       return ret;
     })
   }
@@ -52,10 +54,10 @@ class Komparator extends React.Component {
 
       <div className="pure-g">
         <div className="pure-u-1-2">
-          <TextUploader updated={this.textUpdated.bind(this)} corpusId="left" />
+          <TextUploader updated={this.textUpdated.bind(this)} corpusId="left" text={this.state.left.text} />
         </div>
         <div className="pure-u-1-2">
-          <TextUploader updated={this.textUpdated.bind(this)} corpusId="right" />
+          <TextUploader updated={this.textUpdated.bind(this)} corpusId="right" text={this.state.right.text}/>
         </div>
       </div>
 

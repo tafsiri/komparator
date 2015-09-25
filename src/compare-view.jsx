@@ -15,10 +15,14 @@ export default class CompareView extends React.Component {
     this.komparator = new Komparator({
       container: container
     });
+    this.komparator.update(this.props.left, this.props.right)
+    this.komparator.render()
   }
 
   componentDidUpdate() {
-    console.log("split view update");
+    console.log("componentDidUpdate", this.props);
+    this.komparator.update(this.props.left, this.props.right)
+    this.komparator.render()
   }
 
   render() {

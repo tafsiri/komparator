@@ -12,7 +12,6 @@ export default class TextUploader extends React.Component {
   }
 
   render() {
-    var value = this.state.value;
-    return <textarea onChange={this.handleChange.bind(this)} defaultValue={value} rows="4" cols="50"></textarea>;
+    return <textarea onChange={this.handleChange.bind(this)} defaultValue={this.props.text} rows="4" cols="50"></textarea>;
   }
 }
