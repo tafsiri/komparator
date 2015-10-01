@@ -7,8 +7,10 @@
   "license": "MIT",
   "dependencies": {
     "d3": "^3.5.6",
+    "immutable": "^3.7.5",
     "lodash": "^3.10.1",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "redux": "^3.0.0"
   },
   "devDependencies": {
     "babelify": "^6.3.0",
@@ -17,8 +19,8 @@
     "watchify": "^2.1.1"
   },
   "scripts": {
-    "start": "watchify -e src/index.jsx -t babelify -o build/komparator-app.js",
-    "build": "browserify -e src/index.jsx",
+    "start": "watchify -d -e src/index.jsx -t babelify -o build/komparator-app.js",
+    "build": "browserify -d -e src/index.jsx",
     "build-min": "browserify src/index.jsx | uglifyjs -cm > build/komparator-app.min.js"
   },
   "browserify": {
