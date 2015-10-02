@@ -12,7 +12,7 @@ export default function makeReducer(initialState) {
     switch (action.type) {
       case SET_TEXT:
         return state.updateIn(['sourceTexts', action.corpusId], () => action.text);
-      case SET_MIN_FREQ_THRESHOLD:
+      case SET_MIN_FREQUENCY:
         return state.updateIn(['komparatorOptions', 'minimumFrequency'], () => action.value);
       case SHOW_UNIQUE_TERMS:
         return state.updateIn(['komparatorOptions', 'showUniqueTerms'], () => action.value);

@@ -15,7 +15,7 @@ export function setText(text, corpusId) {
 }
 
 export function setMinimumFrequency(value) {
-  return { type: SET_MIN_FREQ_THRESHOLD, value };
+  return { type: SET_MIN_FREQUENCY, value };
 }
 
 export function showUniqueTerms(value) {

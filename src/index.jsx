@@ -5,14 +5,9 @@ import makeReducer from './reducers';
 import { setText } from './actions';
 import TextUploader from './text-uploader.jsx';
 import CompareView from './compare-view.jsx'
+import Controls from './controls.jsx'
 import samples from '../data/samples.js';
 
-
-class UIMenuComponent extends React.Component {
-  render() {
-    return <div onClick={this._handleClick}>Hello, UIMenuComponent.</div>;
-  }
-}
 
 class Komparator extends React.Component {
 
@@ -59,6 +54,7 @@ class Komparator extends React.Component {
 
     var left = this.state.data.get('sourceTexts').get('left');
     var right = this.state.data.get('sourceTexts').get('right');
+    var options = this.state.data.get('komparatorOptions');
 
     return (
       <div>
@@ -67,7 +63,7 @@ class Komparator extends React.Component {
 
         <div className="pure-g">
           <div className="pure-u-1">
-            <UIMenuComponent/>
+            <Controls store={this.store}/>
           </div>
         </div>
         
@@ -75,7 +71,7 @@ class Komparator extends React.Component {
 
         <div className="pure-g">
           <div className="pure-u-1">
-            <CompareView left={left} right={right}/>
+            <CompareView left={left} right={right} options={options.toJS()}/>
           </div>
         </div>
 
