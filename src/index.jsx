@@ -1,19 +1,25 @@
 import React from 'react';
 import Immutable from 'immutable';
 import { createStore } from 'redux';
-import makeReducer from './reducers';
-import { setText } from './actions';
-import TextUploader from './text-uploader.jsx';
-import CompareView from './compare-view.jsx'
-import Controls from './controls.jsx'
+import makeReducer from './model/reducers';
+import { setText } from './model/actions';
+import TextUploader from './components/text-uploader.jsx';
+import CompareView from './components/compare-view.jsx';
+import Controls from './components/controls.jsx';
 import samples from '../data/samples.js';
 
-
-class Komparator extends React.Component {
+/**
+ * Main component that represents the Komparator demo app.
+ *
+ * Responsible to scafollding the top level components and
+ * connecting them to the data store.
+ */
+class KomparatorApp extends React.Component {
 
   constructor() {
     super();
 
+    // Set up the inital state and create the redux store.
     var initialState = Immutable.fromJS({
       sourceTexts: {
         left: "",
@@ -34,18 +40,29 @@ class Komparator extends React.Component {
 
     this.store.subscribe(() => {
       // Update component state when the store changes.
-      // we use a data property because react requires that 
+      // we use a data property because react requires that
       // what is passed to setState is a pojo, if you pass
       // the immutable object, its prototype will get changed.
       this.setState({'data': this.store.getState()});
-    })
+    });
   }
 
+  /**
+   * On mount we dispatch an action to render the sample text.
+   */
   componentDidMount() {
     this.store.dispatch(setText(samples.nyt, "left"));
     this.store.dispatch(setText(samples.fox, "right"));
   }
 
+  /**
+   * Event handler for updated text. Will update the store with
+   * the new text. Called by the TextUploader components.
+   *
+   * @param  {String} newValue the new text
+   * @param  {String} corpusId the corpusId associated with the text
+   *                           currently 'left'|'right'
+   */
   textUpdated(newValue, corpusId) {
     this.store.dispatch(setText(newValue, corpusId));
   }
@@ -66,7 +83,7 @@ class Komparator extends React.Component {
             <Controls store={this.store}/>
           </div>
         </div>
-        
+
         {/* Compare View, holds the main visualization */}
 
         <div className="pure-g">
@@ -85,16 +102,13 @@ class Komparator extends React.Component {
             <TextUploader updated={this.textUpdated.bind(this)} corpusId="right" text={right}/>
           </div>
         </div>
-        
+
       </div>
     );
   }
 }
 
-
+// Inital render.
 document.addEventListener("DOMContentLoaded", function() {
-  React.render(
-      <Komparator />,
-      document.getElementById('main')
-    );
+  React.render(<KomparatorApp />, document.getElementById('main'));
 });
