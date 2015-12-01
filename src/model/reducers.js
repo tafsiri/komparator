@@ -3,6 +3,8 @@
  * changes of state.
  */
 
+import Immutable from 'immutable';
+import { createStore } from 'redux';
 import {
   SET_TEXT,
   SET_MIN_FREQUENCY,
@@ -20,12 +22,13 @@ import {
  * @return {Function} reducer a function that converts actions and a current
  *                            state into a new state.
  */
-export default function makeReducer(initialState) {
+function makeReducer(initialState) {
 
   /**
    * The reducer function
    * @param  {Object} state  an Immutable.js object a current state
-   * @param  {Object} action an action object @see ./actions.js
+   * @param  {Object} action an action object
+   *                         @see ./actions.js
    * @return {Object}        a new immutable object representing the new state
    */
   var reducer = function(state, action) {
@@ -49,3 +52,20 @@ export default function makeReducer(initialState) {
 
   return reducer;
 }
+
+// Set up the store and inital state. Note that these will be singletons.
+export var initialState = Immutable.fromJS({
+  sourceTexts: {
+    left: "",
+    right: ""
+  },
+  komparatorOptions: {
+    showUniqueTerms: false,
+    minimumFrequency: 3
+  }
+});
+
+var reducer = makeReducer(initialState);
+var store = createStore(reducer);
+
+export function getStore() { return store; }

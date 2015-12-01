@@ -1,8 +1,7 @@
 import React from 'react';
-import Immutable from 'immutable';
-import { createStore } from 'redux';
-import makeReducer from './model/reducers';
 import { setText } from './model/actions';
+import { getStore } from './model/reducers';
+import { initialState } from './model/reducers';
 import TextUploader from './components/text-uploader.jsx';
 import CompareView from './components/compare-view.jsx';
 import Controls from './components/controls.jsx';
@@ -19,30 +18,14 @@ class KomparatorApp extends React.Component {
   constructor() {
     super();
 
-    // Set up the inital state and create the redux store.
-    var initialState = Immutable.fromJS({
-      sourceTexts: {
-        left: "",
-        right: ""
-      },
-      komparatorOptions: {
-        showUniqueTerms: false,
-        minimumFrequency: 3
-      }
-    });
+    // Note the initial state is stored as a property on this POJO because
+    // react requires the state property to be a POJO. If you use the
+    // immutable object directly, its prototype will get changed.
+    this.state = { data: initialState };
 
-    this.state = {
-      data: initialState
-    };
-
-    var reducer = makeReducer(initialState);
-    this.store = createStore(reducer);
+    this.store = getStore();
 
     this.store.subscribe(() => {
-      // Update component state when the store changes.
-      // we use a data property because react requires that
-      // what is passed to setState is a pojo, if you pass
-      // the immutable object, its prototype will get changed.
       this.setState({'data': this.store.getState()});
     });
   }
