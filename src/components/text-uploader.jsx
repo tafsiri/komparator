@@ -7,7 +7,6 @@ import React from 'react';
 export default class TextUploader extends React.Component {
   constructor() {
     super();
-    this.state = { value: "" };
   }
 
   /**
@@ -16,17 +15,14 @@ export default class TextUploader extends React.Component {
    * @return {[type]}       [description]
    */
   handleChange(event) {
-    // Set the internal state of the component to the
-    // new value and trigger the external handler that was
-    // passed in through props.
-    this.setState({value: event.target.value});
-    this.props.updated(this.state.value, this.props.corpusId);
+    // Pass the change event to the handler passed in from the parent.
+    this.props.updated(event.target.value, this.props.corpusId);
   }
 
   render() {
     return <textarea
       onChange={this.handleChange.bind(this)}
-      defaultValue={this.props.text}
+      value={this.props.text}
       rows="4"
       cols="50">
     </textarea>;
