@@ -1,3 +1,6 @@
+import '../css/index.css';
+import '../index.html';
+
 import React from 'react';
 import { setText } from './model/actions';
 import { getStore } from './model/reducers';
