@@ -11,6 +11,11 @@ export default class CompareView extends React.Component {
     super();
   }
 
+  update() {
+    this.komparator.update(this.props.left, this.props.right, this.props.options);
+    this.komparator.render();
+  }
+
   /**
    * On initial mount of the component, inject an instance of a
    * komparator visualization and initilize it.
@@ -24,16 +29,18 @@ export default class CompareView extends React.Component {
       container: container
     });
 
-    this.komparator.update(this.props.left, this.props.right, this.props.options);
-    this.komparator.render();
+    window.addEventListener("resize", this.update.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.update.bind(this));
   }
 
   /**
    * Pass updated data and parameters to the komparator and re-render
    */
   componentDidUpdate() {
-    this.komparator.update(this.props.left, this.props.right, this.props.options);
-    this.komparator.render();
+    this.update();
   }
 
   render() {
