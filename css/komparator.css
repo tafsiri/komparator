@@ -1,9 +1,9 @@
 #komparator .lCorpus-line-top, .lCorpus-line-bottom {
-  stroke: red;
+  stroke: #DCEDC8;
 }
 
 #komparator .rCorpus-line-top, .rCorpus-line-bottom {
-  stroke: blue;
+  stroke: #B3E5FC;
 }
 
 
@@ -11,6 +11,18 @@
   cursor: pointer;
 }
 
+
+#komparator .token rect {
+  fill: #F5F5F5;
+}
+
+#komparator .token.left rect {
+  fill: #DCEDC8;
+}
+
+#komparator .token.right rect {
+  fill: #B3E5FC;
+}
 
 #komparator .node-text {
   font-family: sans-serif;
@@ -27,6 +39,6 @@
 
 
 #komparator .token.active .node-bg {
-  fill:goldenrod;
+  /*fill:goldenrod;*/
   opacity:0.85;
 }
